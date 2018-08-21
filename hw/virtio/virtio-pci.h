@@ -19,6 +19,7 @@
 #include "hw/virtio/virtio-blk.h"
 #include "hw/virtio/virtio-net.h"
 #include "hw/virtio/virtio-rng.h"
+#include "hw/virtio/virtio-example.h"
 #include "hw/virtio/virtio-serial.h"
 #include "hw/virtio/virtio-scsi.h"
 #include "hw/virtio/virtio-balloon.h"
@@ -51,6 +52,7 @@ typedef struct VHostSCSIPCI VHostSCSIPCI;
 typedef struct VHostUserSCSIPCI VHostUserSCSIPCI;
 typedef struct VHostUserBlkPCI VHostUserBlkPCI;
 typedef struct VirtIORngPCI VirtIORngPCI;
+typedef struct VirtIOExamplePCI VirtIOExamplePCI;
 typedef struct VirtIOInputPCI VirtIOInputPCI;
 typedef struct VirtIOInputHIDPCI VirtIOInputHIDPCI;
 typedef struct VirtIOInputHostPCI VirtIOInputHostPCI;
@@ -337,6 +339,18 @@ typedef struct V9fsPCIState {
 struct VirtIORngPCI {
     VirtIOPCIProxy parent_obj;
     VirtIORNG vdev;
+};
+
+/*
+ * virtio-example-pci: This extends VirtioPCIProxy.
+ */
+#define TYPE_VIRTIO_EXAMPLE_PCI "virtio-example-pci"
+#define VIRTIO_EXAMPLE_PCI(obj) \
+        OBJECT_CHECK(VirtIOExamplePCI, (obj), TYPE_VIRTIO_EXAMPLE_PCI)
+
+struct VirtIOExamplePCI {
+    VirtIOPCIProxy parent_obj;
+    VirtIOEXAMPLE vdev;
 };
 
 /*
